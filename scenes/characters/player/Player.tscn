@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dveg18orlosfo"]
+
+[ext_resource type="Script" uid="uid://c13p1llgp7f2t" path="res://scenes/characters/player/Player.gd" id="1_c12fh"]
+[ext_resource type="Script" uid="uid://upuj6cnbmsdi" path="res://scripts/systems/Gravity.gd" id="2_b7oxf"]
+[ext_resource type="Script" uid="uid://c1nt52sfwvxh1" path="res://scripts/systems/PlatformerMovementController.gd" id="3_c12fh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srvkq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_db84v"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_c12fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_srvkq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(22, 38)
+texture = SubResource("PlaceholderTexture2D_db84v")
+
+[node name="Gravity" type="Node" parent="."]
+script = ExtResource("2_b7oxf")
+metadata/_custom_type_script = "uid://upuj6cnbmsdi"
+
+[node name="MovementController" type="Node" parent="."]
+script = ExtResource("3_c12fh")
+air_speed = 250
