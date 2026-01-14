@@ -1,23 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://dveg18orlosfo"]
+[gd_scene load_steps=7 format=3 uid="uid://dveg18orlosfo"]
 
 [ext_resource type="Script" uid="uid://c13p1llgp7f2t" path="res://scenes/characters/player/Player.gd" id="1_c12fh"]
 [ext_resource type="Script" uid="uid://upuj6cnbmsdi" path="res://scripts/systems/Gravity.gd" id="2_b7oxf"]
 [ext_resource type="Texture2D" uid="uid://cimtw34mpepls" path="res://assets/sprites/player/img_0.png" id="2_lxifr"]
 [ext_resource type="Script" uid="uid://c1nt52sfwvxh1" path="res://scripts/systems/PlatformerMovementController.gd" id="3_c12fh"]
 [ext_resource type="Script" uid="uid://dh333kpfy6m0i" path="res://scripts/systems/FacingComponent.gd" id="4_7xy7u"]
-[ext_resource type="Script" uid="uid://b1ockxpysdx5h" path="res://scripts/systems/AimingComponent.gd" id="6_imd1d"]
-[ext_resource type="Script" uid="uid://cvnc4b2mevk6p" path="res://scripts/systems/Dash.gd" id="7_k835w"]
-[ext_resource type="Script" uid="uid://degesfr78of2o" path="res://scripts/systems/Friction.gd" id="8_lces5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_imd1d"]
-size = Vector2(28, 41)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srvkq"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_c12fh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_imd1d")
+shape = SubResource("CapsuleShape2D_srvkq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_lxifr")
@@ -35,22 +30,5 @@ jump_speed = 750
 
 [node name="FacingComponent" type="Node" parent="."]
 script = ExtResource("4_7xy7u")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-
-[node name="AimingComponent" type="Node" parent="."]
-script = ExtResource("6_imd1d")
-metadata/_custom_type_script = "uid://b1ockxpysdx5h"
-
-[node name="CrossHair" type="Marker2D" parent="AimingComponent"]
-position = Vector2(20, 0)
-
-[node name="DashComponent" type="Node" parent="."]
-script = ExtResource("7_k835w")
-dash_strength = 1000
-
-[node name="FrictionComponent" type="Node" parent="."]
-script = ExtResource("8_lces5")
-friction = 2000.0
+direction_mode = null
+facing = null

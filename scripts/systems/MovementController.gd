@@ -9,5 +9,9 @@ func get_input():
 	return input_direction
 
 func move(delta):
-	body.velocity += get_input() * speed * delta;
-	print(body.velocity)
+	if get_input() != Vector2.ZERO:
+		body.velocity += get_input() * speed * delta;
+	else:
+		#body.get_node("FrictionComponent").apply_friction()
+		pass
+	#print(body.velocity)

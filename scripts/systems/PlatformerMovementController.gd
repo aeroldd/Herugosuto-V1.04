@@ -6,6 +6,7 @@ extends Node
 @export var air_speed = 150;
 
 @export var jump_speed = 500;
+@export var acceleration = 5000;
 
 @onready var body: CharacterBody2D = get_parent()
 
@@ -17,18 +18,15 @@ func check_jump():
 	if Input.is_action_just_pressed("Jump") and body.is_on_floor():
 		body.velocity.y = -jump_speed;
 
-func move(delta):
+func move(delta):	
+	if get_direction() != Vector2.ZERO:
+		if body.is_on_floor():
+			body.velocity.x = move_toward(body.velocity.x, get_direction().x * speed, delta * acceleration)
+
+		else:
+			body.velocity.x = move_toward(body.velocity.x, get_direction().x * air_speed, delta * acceleration)
+			
+		#check for jumping
+		check_jump()
 	
-	if body.is_on_floor():
-		# Only update the left and right directions
-		body.velocity.x = get_direction().x * speed;
-		body.velocity.x = min(body.velocity.x, max_speed);
-	
-	else:
-		body.velocity.x = get_direction().x * air_speed;
-		body.velocity.x = min(body.velocity.x, max_speed);
-		
-	#check for jumping
-	check_jump()
-	
-	print(body.velocity)
+	#print(body.velocity)
