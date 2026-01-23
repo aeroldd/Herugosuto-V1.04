@@ -25,3 +25,5 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_rxs17")]
 position = Vector2(286, 204)
+
+[editable path="Player"]

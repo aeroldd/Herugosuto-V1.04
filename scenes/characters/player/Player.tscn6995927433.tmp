@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dveg18orlosfo"]
+[gd_scene load_steps=13 format=3 uid="uid://dveg18orlosfo"]
 
 [ext_resource type="Script" uid="uid://c13p1llgp7f2t" path="res://scenes/characters/player/Player.gd" id="1_c12fh"]
 [ext_resource type="Script" uid="uid://upuj6cnbmsdi" path="res://scripts/systems/Gravity.gd" id="2_b7oxf"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://cb5a0nwhvc42a" path="res://scripts/systems/JumpComponent.gd" id="7_5edqu"]
 [ext_resource type="Script" uid="uid://cvnc4b2mevk6p" path="res://scripts/systems/DashController.gd" id="7_k835w"]
 [ext_resource type="Script" uid="uid://degesfr78of2o" path="res://scripts/systems/Friction.gd" id="8_lces5"]
-[ext_resource type="Script" uid="uid://dt3671l3p8who" path="res://scenes/characters/player/StateDebugger.gd" id="9_jevs6"]
 [ext_resource type="Script" uid="uid://d1pjyd3bfilmb" path="res://scripts/systems/InputIntent.gd" id="11_wwjds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imd1d"]
@@ -51,18 +50,6 @@ metadata/_custom_type_script = "uid://cb5a0nwhvc42a"
 [node name="DashController" type="Node" parent="MovementController"]
 script = ExtResource("7_k835w")
 dash_strength = 1000
-
-[node name="CanvasLayer" type="CanvasLayer" parent="MovementController"]
-
-[node name="StateDebugger" type="Label" parent="MovementController/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("9_jevs6")
-
-[node name="InputDebugger" type="Label" parent="MovementController/CanvasLayer"]
-offset_top = 24.0
-offset_right = 37.0
-offset_bottom = 47.0
 
 [node name="FacingComponent" type="Node" parent="."]
 script = ExtResource("4_7xy7u")
