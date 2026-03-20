@@ -1,8 +1,8 @@
-extends Node
-class_name JumpComponent
+class_name JumpAbility extends MovementAbility
 
-func jump(velocity: Vector2, jump_speed):
-	if Input.is_action_just_pressed("Jump"):
-		print("Jumped!")
-		return Vector2(velocity.x, -jump_speed)
-	return velocity
+@export var jump_speed: float = 500
+
+func apply(input_intent: InputIntent, _velocity, _delta) -> Vector2:
+	if input_intent.jump_pressed:
+		return Vector2(0, -jump_speed)
+	return Vector2.ZERO

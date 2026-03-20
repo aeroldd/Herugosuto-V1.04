@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb4ql53s0si8q"]
+[gd_scene load_steps=5 format=3 uid="uid://bb4ql53s0si8q"]
 
 [ext_resource type="PackedScene" uid="uid://dveg18orlosfo" path="res://scenes/characters/player/Player.tscn" id="1_rxs17"]
+[ext_resource type="PackedScene" uid="uid://brypyr6fphdmg" path="res://scenes/debug/debug_window.tscn" id="2_vw10q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pybf"]
 size = Vector2(584, 20)
@@ -26,4 +27,29 @@ metadata/_edit_lock_ = true
 [node name="Player" parent="." instance=ExtResource("1_rxs17")]
 position = Vector2(286, 204)
 
+[node name="DashDebugger" parent="Player/MovementController/CanvasLayer" index="2"]
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 42.0
+offset_bottom = 98.0
+
+[node name="Window" parent="." instance=ExtResource("2_vw10q")]
+
+[node name="XVelocity" parent="Window" index="0" node_paths=PackedStringArray("movement_controller")]
+visible = false
+movement_controller = NodePath("../../Player/MovementController")
+
+[node name="Control" parent="Window/XVelocity" index="0"]
+toggle = false
+
+[node name="YVelocity" parent="Window" index="1" node_paths=PackedStringArray("movement_controller")]
+transparent_bg = true
+visible = false
+transparent = true
+movement_controller = NodePath("../../Player/MovementController")
+
+[node name="Control" parent="Window/YVelocity" index="0"]
+toggle = false
+
 [editable path="Player"]
+[editable path="Window"]

@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://brypyr6fphdmg"]
+
+[ext_resource type="Script" uid="uid://oeugaru1ms3h" path="res://scenes/debug/debug_window.gd" id="1_8u1vg"]
+[ext_resource type="Script" uid="uid://dhgbawq2db22q" path="res://scenes/debug/velocity_x_line.gd" id="1_hoxrc"]
+
+[node name="Node" type="Node"]
+
+[node name="XVelocity" type="Window" parent="."]
+oversampling_override = 1.0
+title = "X Velocity over time"
+position = Vector2i(0, 36)
+size = Vector2i(315, 160)
+unfocusable = true
+mouse_passthrough = true
+script = ExtResource("1_8u1vg")
+
+[node name="Control" type="Control" parent="XVelocity" node_paths=PackedStringArray("window")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 2.0
+offset_right = 313.0
+offset_bottom = 159.0
+script = ExtResource("1_hoxrc")
+window = NodePath("..")
+
+[node name="Label" type="Label" parent="XVelocity"]
+offset_left = 2.0
+offset_top = 114.0
+offset_right = 85.47482
+offset_bottom = 137.0
+rotation = -1.5707964
+text = "X velocity"
+
+[node name="Label2" type="Label" parent="XVelocity"]
+offset_left = 126.0
+offset_top = 139.0
+offset_right = 166.0
+offset_bottom = 162.0
+text = "time"
+
+[node name="CurrentValue" type="Label" parent="XVelocity"]
+offset_left = 228.0
+offset_top = 1.0
+offset_right = 268.0
+offset_bottom = 24.0
+
+[node name="YVelocity" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Y Velocity over time"
+position = Vector2i(0, 241)
+size = Vector2i(315, 160)
+always_on_top = true
+unfocusable = true
+mouse_passthrough = true
+script = ExtResource("1_8u1vg")
+
+[node name="Control" type="Control" parent="YVelocity" node_paths=PackedStringArray("window")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 2.0
+offset_right = 313.0
+offset_bottom = 159.0
+script = ExtResource("1_hoxrc")
+window = NodePath("..")
+mode = "y"
+
+[node name="Label" type="Label" parent="YVelocity"]
+offset_left = 2.0
+offset_top = 114.0
+offset_right = 85.47482
+offset_bottom = 137.0
+rotation = -1.5707964
+text = "Y velocity"
+
+[node name="Label2" type="Label" parent="YVelocity"]
+offset_left = 126.0
+offset_top = 139.0
+offset_right = 166.0
+offset_bottom = 162.0
+text = "time"
+
+[node name="CurrentValue" type="Label" parent="YVelocity"]
+offset_left = 228.0
+offset_top = 1.0
+offset_right = 268.0
+offset_bottom = 24.0

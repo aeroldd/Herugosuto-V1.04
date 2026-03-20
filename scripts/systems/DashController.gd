@@ -1,35 +1,38 @@
-extends Node
-class_name DashController
+class_name DashController extends MovementAbility
 
-var input_intent: InputIntent
-var aiming_component: AimingComponent
+@export var dash_strength = 700
+@export var dash_length: float = 0.2
 
-@export var dash_strength = 100
+var dash_timer: float = 0
+var time
 
-func _ready() -> void:
-	input_intent = get_parent().input_intent
-	aiming_component = get_parent().aiming_component
+@export var decay = 1000
+
+var dash_velocity: Vector2 = Vector2.ZERO
 	
-func calculate_dash_velocity(dash_strength: float):
+func calculate_dash_velocity(dash_strength: float, dash_angle: float) -> Vector2:
 	var new_velocity: Vector2
-	new_velocity.x = cos(aiming_component.get_angle()) * dash_strength
-	new_velocity.y = sin(aiming_component.get_angle()) * dash_strength
-	print("dash! velocity is" + str(new_velocity) + " aim angle is: " + str(aiming_component.get_angle()))
+	
+	new_velocity.x = cos(dash_angle) * dash_strength
+	new_velocity.y = max(sin(dash_angle) * dash_strength, -400)
 	
 	return new_velocity
 	
+func check_dash_pressed(input_intent):
+	return input_intent.dash_pressed
+	
 # Calculates the changed dash velocity if conditions are met (dash cooldown reset and dash input pressed_
-func update(velocity: Vector2, dash_timer: float, dash_length: float, dash_strength: float, dash_decay: float, delta):
-	# if dash timer is above 0 AND the dash button was just pressed, calculate the dash velocity
-	# and return it back
-	if dash_timer <= 0 and input_intent.dash_pressed:
+func apply(input_intent, _velocity, delta):
+	if input_intent.dash_pressed:
 		dash_timer = dash_length
-		return calculate_dash_velocity(dash_strength)
-		
-	else:
-		# Decriment dash timer
-		dash_timer = move_toward(dash_timer, 0, delta)
-		
-		# decreate the dash distance somehow
-		return move_toward(velocity.x, 0, dash_decay * dash_timer * delta)
-		
+		if dash_timer == dash_length: #just pressed dash
+			var dash_angle = input_intent.get_angle()
+			dash_velocity = calculate_dash_velocity(dash_strength, dash_angle)
+			return dash_velocity
+	dash_timer = move_toward(dash_timer, 0, delta)
+	
+	#slow the dash down
+	dash_velocity.x = move_toward(dash_velocity.x, 0, decay)
+	dash_velocity.y = move_toward(dash_velocity.y, 0, decay)
+	
+	return dash_velocity

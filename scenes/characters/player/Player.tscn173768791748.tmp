@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dveg18orlosfo"]
+[gd_scene load_steps=15 format=3 uid="uid://dveg18orlosfo"]
 
 [ext_resource type="Script" uid="uid://c13p1llgp7f2t" path="res://scenes/characters/player/Player.gd" id="1_c12fh"]
 [ext_resource type="Script" uid="uid://upuj6cnbmsdi" path="res://scripts/systems/Gravity.gd" id="2_b7oxf"]
@@ -11,8 +11,6 @@
 [ext_resource type="Script" uid="uid://cvnc4b2mevk6p" path="res://scripts/systems/DashController.gd" id="7_k835w"]
 [ext_resource type="Script" uid="uid://degesfr78of2o" path="res://scripts/systems/Friction.gd" id="8_lces5"]
 [ext_resource type="Script" uid="uid://dkqa704hidetb" path="res://scenes/characters/player/debug_canvas.gd" id="9_iugeb"]
-[ext_resource type="Script" uid="uid://nnh2s2br5ce" path="res://scenes/characters/player/movement_abilities.gd" id="10_iugeb"]
-[ext_resource type="Script" uid="uid://0aquqywff1wx" path="res://scenes/characters/player/movement_state_machine.gd" id="11_tdog2"]
 [ext_resource type="Script" uid="uid://d1pjyd3bfilmb" path="res://scripts/systems/InputIntent.gd" id="11_wwjds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imd1d"]
@@ -34,11 +32,14 @@ texture = ExtResource("2_lxifr")
 
 [node name="MovementController" type="Node" parent="."]
 script = ExtResource("4_lces5")
+ground_speed = 210
+air_speed = 300
+accel = 3000.0
 dash_length = 0.3
 dash_strength = 660.0
 curve = SubResource("Curve_iugeb")
 
-[node name="HorizontalMovementComponent" type="Node" parent="MovementController"]
+[node name="HorizontalMovementIntent" type="Node" parent="MovementController"]
 script = ExtResource("5_jhxyj")
 
 [node name="FrictionComponent" type="Node" parent="MovementController"]
@@ -50,10 +51,16 @@ script = ExtResource("2_b7oxf")
 gravity = 1500
 metadata/_custom_type_script = "uid://upuj6cnbmsdi"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="MovementController" node_paths=PackedStringArray("dash_controller")]
-visible = false
+[node name="JumpComponent" type="Node" parent="MovementController"]
+script = ExtResource("7_5edqu")
+metadata/_custom_type_script = "uid://cb5a0nwhvc42a"
+
+[node name="DashController" type="Node" parent="MovementController"]
+script = ExtResource("7_k835w")
+dash_strength = 1000
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MovementController"]
 script = ExtResource("9_iugeb")
-dash_controller = NodePath("../MovementAbilities/DashAbility")
 
 [node name="StateDebugger" type="Label" parent="MovementController/CanvasLayer"]
 offset_right = 40.0
@@ -75,20 +82,6 @@ offset_top = 108.0
 offset_right = 40.0
 offset_bottom = 131.0
 
-[node name="MovementAbilities" type="Node" parent="MovementController"]
-script = ExtResource("10_iugeb")
-
-[node name="JumpAbility" type="Node" parent="MovementController/MovementAbilities"]
-script = ExtResource("7_5edqu")
-metadata/_custom_type_script = "uid://cb5a0nwhvc42a"
-
-[node name="DashAbility" type="Node" parent="MovementController/MovementAbilities"]
-script = ExtResource("7_k835w")
-dash_strength = 1000
-
-[node name="MovementStateMachine" type="Node" parent="MovementController"]
-script = ExtResource("11_tdog2")
-
 [node name="FacingComponent" type="Node" parent="."]
 script = ExtResource("4_7xy7u")
 
@@ -103,5 +96,6 @@ metadata/_custom_type_script = "uid://b1ockxpysdx5h"
 [node name="CrossHair" type="Marker2D" parent="AimingComponent"]
 position = Vector2(20, 0)
 
-[node name="InputIntent" type="Node2D" parent="."]
+[node name="InputIntent" type="Node" parent="."]
 script = ExtResource("11_wwjds")
+metadata/_custom_type_script = "uid://d1pjyd3bfilmb"
