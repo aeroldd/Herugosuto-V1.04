@@ -41,7 +41,10 @@ func _ready():
 	movement_abilities = $MovementAbilities
 
 # State flags
-var flags = {"is_moving" = false, "is_controller" = false, "is_on_floor" = false}
+var flags = {"is_moving" = false,
+			 "is_controller" = false,
+			 "is_on_floor" = false,
+			 "is_dashing" = false}
 
 # Getters and setters
 
@@ -63,7 +66,8 @@ func update_flags():
 func apply(input_intent, delta):
 	update_flags()
 	velocity = horizontal_movement_component.apply(input_intent, velocity, delta) + gravity_component.apply(velocity, flags["is_on_floor"], delta) + movement_abilities.apply(input_intent, velocity, delta)
-		
+	movement_abilities.update(flags)
+	
 	return velocity
 	
 	

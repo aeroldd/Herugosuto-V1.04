@@ -27,6 +27,9 @@ metadata/_edit_lock_ = true
 [node name="Player" parent="." instance=ExtResource("1_rxs17")]
 position = Vector2(286, 204)
 
+[node name="CanvasLayer" parent="Player/MovementController" index="3"]
+visible = false
+
 [node name="DashDebugger" parent="Player/MovementController/CanvasLayer" index="2"]
 offset_left = 2.0
 offset_top = 75.0
