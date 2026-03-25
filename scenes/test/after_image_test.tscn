@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2cqbh2mtan74"]
+
+[ext_resource type="PackedScene" uid="uid://dveg18orlosfo" path="res://scenes/characters/player/Player.tscn" id="1_xvgoi"]
+[ext_resource type="Texture2D" uid="uid://bx8lr6nc1dn31" path="res://assets/light/light.png" id="2_l6pvs"]
+[ext_resource type="PackedScene" uid="uid://brypyr6fphdmg" path="res://scenes/debug/debug_window.tscn" id="3_is7ay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pybf"]
+size = Vector2(584, 20)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vw10q"]
+specular_color = Color(0.32473823, 2.7675183e-06, 1.6605109e-06, 1)
+
+[node name="PlayerTest" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(46, 285)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(282, 0)
+shape = SubResource("RectangleShape2D_6pybf")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -10.999999
+offset_top = 23.999998
+offset_right = 29.0
+offset_bottom = 64.0
+scale = Vector2(14.618705, -0.85002935)
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_xvgoi")]
+position = Vector2(286, 204)
+
+[node name="CanvasLayer" parent="Player/MovementController" index="3"]
+visible = false
+
+[node name="DashDebugger" parent="Player/MovementController/CanvasLayer" index="2"]
+offset_left = 2.0
+offset_top = 75.0
+offset_right = 42.0
+offset_bottom = 98.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+scale = Vector2(1.0104629, 1)
+blend_mode = 2
+texture = ExtResource("2_l6pvs")
+texture_scale = 2.31
+
+[node name="Window" parent="." instance=ExtResource("3_is7ay")]
+
+[node name="XVelocity" parent="Window" index="0" node_paths=PackedStringArray("movement_controller")]
+visible = false
+movement_controller = NodePath("../../Player/MovementController")
+
+[node name="Control" parent="Window/XVelocity" index="0"]
+toggle = false
+
+[node name="YVelocity" parent="Window" index="1" node_paths=PackedStringArray("movement_controller")]
+transparent_bg = true
+visible = false
+transparent = true
+movement_controller = NodePath("../../Player/MovementController")
+
+[node name="Control" parent="Window/YVelocity" index="0"]
+toggle = false
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -10
+position = Vector2(310, 190)
+amount = 7
+texture = SubResource("CanvasTexture_vw10q")
+lifetime = 60.0
+preprocess = 720.0
+randomness = 0.28
+emission_shape = 3
+emission_rect_extents = Vector2(300, 200)
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+linear_accel_min = -7.5
+linear_accel_max = 0.83
+scale_amount_min = 28.45
+scale_amount_max = 80.6
+color = Color(0.11372549, 0, 0.14901961, 1)
+hue_variation_min = -0.56
+hue_variation_max = 0.44
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+scale = Vector2(-7.1266003, 1.2463053)
+color = Color(0.16959998, 0.21722668, 0.32, 1)
+
+[editable path="Player"]
+[editable path="Window"]
