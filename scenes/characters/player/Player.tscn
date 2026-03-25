@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dveg18orlosfo"]
+[gd_scene load_steps=22 format=3 uid="uid://dveg18orlosfo"]
 
 [ext_resource type="Script" uid="uid://c13p1llgp7f2t" path="res://scenes/characters/player/Player.gd" id="1_c12fh"]
 [ext_resource type="Script" uid="uid://upuj6cnbmsdi" path="res://scripts/systems/Gravity.gd" id="2_b7oxf"]
@@ -10,13 +10,15 @@
 [ext_resource type="Script" uid="uid://cb5a0nwhvc42a" path="res://scripts/systems/JumpComponent.gd" id="7_5edqu"]
 [ext_resource type="Script" uid="uid://cvnc4b2mevk6p" path="res://scripts/systems/DashController.gd" id="7_k835w"]
 [ext_resource type="Script" uid="uid://degesfr78of2o" path="res://scripts/systems/Friction.gd" id="8_lces5"]
-[ext_resource type="Script" uid="uid://dkqa704hidetb" path="res://scenes/characters/player/debug_canvas.gd" id="9_iugeb"]
+[ext_resource type="Script" uid="uid://dkqa704hidetb" path="res://scenes/debug/debug_canvas.gd" id="9_iugeb"]
 [ext_resource type="Script" uid="uid://nnh2s2br5ce" path="res://scenes/characters/player/movement_abilities.gd" id="10_iugeb"]
 [ext_resource type="PackedScene" uid="uid://ciros45ilvib2" path="res://scenes/vfx/after_image_vfx.tscn" id="11_n0ygo"]
 [ext_resource type="Script" uid="uid://0aquqywff1wx" path="res://scenes/characters/player/movement_state_machine.gd" id="11_tdog2"]
 [ext_resource type="Script" uid="uid://d1pjyd3bfilmb" path="res://scripts/systems/InputIntent.gd" id="11_wwjds"]
+[ext_resource type="Script" uid="uid://bbmdlb8fxrkxk" path="res://scenes/characters/player/camera.gd" id="14_omv6f"]
 [ext_resource type="Script" uid="uid://bl3xboi8ve1nt" path="res://scenes/vfx/vfx_controller.gd" id="16_7onrl"]
 [ext_resource type="Script" uid="uid://dpex28bokpbjw" path="res://scenes/characters/player/dash_vfx.gd" id="17_o3xhh"]
+[ext_resource type="Script" uid="uid://c5p7a4p1thqwi" path="res://scenes/characters/player/jump_vfx.gd" id="19_yr7ad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imd1d"]
 size = Vector2(28, 41)
@@ -86,7 +88,8 @@ metadata/_custom_type_script = "uid://cb5a0nwhvc42a"
 
 [node name="DashAbility" type="Node" parent="MovementController/MovementAbilities" node_paths=PackedStringArray("sprite")]
 script = ExtResource("7_k835w")
-dash_strength = 1000
+dash_strength = 850
+dash_length = 0.175
 decay = 750
 spawn_interval = 0.02
 after_image = ExtResource("11_n0ygo")
@@ -98,10 +101,6 @@ script = ExtResource("11_tdog2")
 [node name="FacingComponent" type="Node" parent="."]
 script = ExtResource("4_7xy7u")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-
 [node name="AimingComponent" type="Node" parent="."]
 script = ExtResource("6_imd1d")
 metadata/_custom_type_script = "uid://b1ockxpysdx5h"
@@ -112,10 +111,22 @@ position = Vector2(20, 0)
 [node name="InputIntent" type="Node2D" parent="."]
 script = ExtResource("11_wwjds")
 
-[node name="VFXController" type="Node" parent="."]
+[node name="VFXController" type="Node2D" parent="."]
 script = ExtResource("16_7onrl")
 
-[node name="DashVFX" type="Node" parent="VFXController" node_paths=PackedStringArray("sprite")]
+[node name="DashVFX" type="Node2D" parent="VFXController" node_paths=PackedStringArray("sprite", "camera")]
 script = ExtResource("17_o3xhh")
 after_image = ExtResource("11_n0ygo")
 sprite = NodePath("../../Sprite2D")
+camera = NodePath("../../CameraController")
+
+[node name="JumpVFX" type="Node2D" parent="VFXController"]
+script = ExtResource("19_yr7ad")
+
+[node name="CameraController" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("14_omv6f")
+camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="CameraController"]
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
