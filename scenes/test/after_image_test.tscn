@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2cqbh2mtan74"]
+
+[ext_resource type="Script" uid="uid://dfjjqb5lsp65p" path="res://scenes/test/after_image_test.gd" id="1_hhete"]
+[ext_resource type="PackedScene" uid="uid://ciros45ilvib2" path="res://scenes/vfx/after_image_vfx.tscn" id="1_whq33"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_hhete")
+img = ExtResource("1_whq33")
+
+[node name="AfterImageVFX" parent="." instance=ExtResource("1_whq33")]
+position = Vector2(244, 124)
+r = 0.095
+g = 0.6
+b = 0.4

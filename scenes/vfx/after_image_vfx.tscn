@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciros45ilvib2"]
+
+[ext_resource type="Script" uid="uid://ct716dgb5eu0b" path="res://scripts/vfx/after_image_vfx.gd" id="1_fiat4"]
+[ext_resource type="Texture2D" uid="uid://cimtw34mpepls" path="res://assets/sprites/player/img_0.png" id="2_nnhev"]
+
+[node name="AfterImageVFX" type="Node2D"]
+script = ExtResource("1_fiat4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nnhev")
