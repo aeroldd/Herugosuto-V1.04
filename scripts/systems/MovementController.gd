@@ -24,6 +24,9 @@ var velocity: Vector2
 
 @export var curve: Curve
 
+# SIGNALS
+signal landed_on_floor(y_velocity: float)
+
 # Physics components
 
 var body: Player
@@ -57,11 +60,14 @@ func get_current_state():
 func get_current_state_name():
 	return states.find_key(current_state)
 
-	
 func update_flags():
+	if not flags["is_on_floor"] and body.is_on_floor():
+		emit_signal("landed_on_floor", velocity_y_history[-2])
+		
 	flags["is_on_floor"] = body.is_on_floor()
 	flags["is_controlled"] = input_intent.move_direction != 0
 	flags["is_moving"] = velocity != Vector2.ZERO
+	
 	
 func apply(input_intent, delta):
 	update_flags()
@@ -69,7 +75,6 @@ func apply(input_intent, delta):
 	movement_abilities.update(flags)
 	
 	return velocity
-	
 	
 # DEBUGGING STUFF
 var velocity_x_history = []
