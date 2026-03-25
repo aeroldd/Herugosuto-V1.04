@@ -13,3 +13,7 @@ func apply(input_intent, veloicty, delta) -> Vector2:
 	for ability in movement_abilities:
 		velocity += ability.apply(input_intent, velocity, delta)
 	return velocity
+	
+func update(flags):
+	for ability in movement_abilities:
+		ability.update(flags)
