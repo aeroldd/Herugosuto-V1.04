@@ -6,6 +6,10 @@ var spawn_timer: float = 0
 @export var after_image: PackedScene
 @export var sprite: Sprite2D
 
+@export var camera: CameraController
+@export var shake_strength: float = 3
+@export var shake_fade: float = 5
+
 var active: bool = false
 
 # connect all the signals from the dash controller
@@ -17,6 +21,7 @@ func _ready() -> void:
 func _on_dash_started():
 	active = true
 	sprite.modulate.inverted()
+	camera.apply_shake(shake_strength, shake_fade)
 	
 func _on_dash_ended():
 	active = false
