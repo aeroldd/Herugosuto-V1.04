@@ -1,42 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb4ql53s0si8q"]
+[gd_scene format=4 uid="uid://bb4ql53s0si8q"]
 
 [ext_resource type="PackedScene" uid="uid://dveg18orlosfo" path="res://scenes/characters/player/Player.tscn" id="1_rxs17"]
 [ext_resource type="PackedScene" uid="uid://brypyr6fphdmg" path="res://scenes/debug/debug_window.tscn" id="2_vw10q"]
+[ext_resource type="TileSet" uid="uid://c28u367y0p21l" path="res://assets/tilesets/main_tile_set.tres" id="3_7qqnc"]
+[ext_resource type="PackedScene" uid="uid://diao5v24xqtls" path="res://scenes/grass/Grass.tscn" id="4_5aw5e"]
+[ext_resource type="Script" uid="uid://d2lb7qrnndig6" path="res://scripts/world/grass_manager.gd" id="4_kgbvn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pybf"]
-size = Vector2(584, 20)
+[node name="PlayerTest" type="Node2D" unique_id=1431353261]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rxs17"]
-
-[node name="PlayerTest" type="Node2D"]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(46, 285)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(282, 0)
-shape = SubResource("RectangleShape2D_6pybf")
-metadata/_edit_lock_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(282.49997, -3.5762787e-07)
-scale = Vector2(584.99994, 20)
-texture = SubResource("PlaceholderTexture2D_rxs17")
-metadata/_edit_lock_ = true
-
-[node name="Player" parent="." instance=ExtResource("1_rxs17")]
+[node name="Player" parent="." unique_id=730645924 instance=ExtResource("1_rxs17")]
 position = Vector2(286, 204)
 
-[node name="CanvasLayer" parent="Player/MovementController" index="3"]
+[node name="CanvasLayer" parent="Player/MovementController" parent_id_path=PackedInt32Array(730645924, 1561343304) index="3" unique_id=907229853]
 visible = false
 
-[node name="DashDebugger" parent="Player/MovementController/CanvasLayer" index="2"]
+[node name="DashDebugger" parent="Player/MovementController/CanvasLayer" index="2" unique_id=90311608]
 offset_left = 2.0
 offset_top = 75.0
 offset_right = 42.0
 offset_bottom = 98.0
 
-[node name="Window" parent="." instance=ExtResource("2_vw10q")]
+[node name="Window" parent="." unique_id=169261383 instance=ExtResource("2_vw10q")]
 
 [node name="XVelocity" parent="Window" index="0" node_paths=PackedStringArray("movement_controller")]
 visible = false
@@ -53,6 +37,22 @@ movement_controller = NodePath("../../Player/MovementController")
 
 [node name="Control" parent="Window/YVelocity" index="0"]
 toggle = false
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1659659613]
+
+[node name="Ground" type="TileMapLayer" parent="Node2D" unique_id=1614085537]
+tile_map_data = PackedByteArray("AAAOABAAGAAAAAAAAAAPABAAGAAAAAAAAAAQABAAGAAAAAAAAAARABAAGAAAAAAAAAASABAAGAAAAAAAAAATABAAGAAAAAAAAAAUABAAGAAAAAAAAAAOABEAGAAAAAkAAAAPABEAGAAAAAkAAAAQABEAGAAAAAkAAAARABEAGAAAAAkAAAASABEAGAAAAAkAAAATABEAGAAAAAkAAAAUABEAGAAAAAkAAAAOABIAGAAAAAkAAAAPABIAGAAAAAkAAAAQABIAGAAAAAkAAAARABIAGAAAAAkAAAASABIAGAAAAAkAAAATABIAGAAAAAkAAAAUABIAGAAAAAkAAAAOABMAGAAAAAkAAAAPABMAGAAAAAkAAAAQABMAGAAAAAkAAAARABMAGAAAAAkAAAASABMAGAAAAAkAAAATABMAGAAAAAkAAAAUABMAGAAAAAkAAAANAA0AGAAAAAAAAAAMAA0AGAAAAAAAAAALAA0AGAAAAAAAAAAKAA0AGAAAAAAAAAANAA4AGAAAAAkAAAAMAA4AGAAAAAkAAAALAA4AGAAAAAkAAAAKAA4AGAAAAAkAAAAKAA8AGAAAAAkAAAALAA8AGAAAAAkAAAAMAA8AGAAAAAkAAAANAA8AGAAAAAkAAAANABAAGAAAAAkAAAAMABAAGAAAAAkAAAALABAAGAAAAAkAAAAKABAAGAAAAAkAAAAKABEAGAAAAAkAAAALABEAGAAAAAkAAAAMABEAGAAAAAkAAAANABEAGAAAAAkAAAANABIAGAAAAAkAAAAMABIAGAAAAAkAAAALABIAGAAAAAkAAAAKABIAGAAAAAkAAAAVABAAGAAAAAAAAAAVABEAGAAAAAkAAAAVABIAGAAAAAkAAAAVABMAGAAAAAkAAAAWABAAGAAAAAAAAAAWABEAGAAAAAkAAAAWABIAGAAAAAkAAAAWABMAGAAAAAkAAAAXABEAGAAAAAkAAAAXABIAGAAAAAkAAAAXABMAGAAAAAkAAAAYABAAGAAAAAAAAAAYABEAGAAAAAkAAAAYABIAGAAAAAkAAAAYABMAGAAAAAkAAAAZABAAGAAAAAAAAAAZABEAGAAAAAkAAAAZABIAGAAAAAkAAAAZABMAGAAAAAkAAAAaABAAGAAAAAAAAAAaABEAGAAAAAkAAAAaABIAGAAAAAkAAAAaABMAGAAAAAkAAAAbABAAGAAAAAAAAAAbABEAGAAAAAkAAAAbABIAGAAAAAkAAAAbABMAGAAAAAkAAAAcAA8AGAAAAAAAAAAcABAAGAAAAAkAAAAcABEAGAAAAAkAAAAcABIAGAAAAAkAAAAdAA8AGAAAAAAAAAAdABAAGAAAAAkAAAAdABEAGAAAAAkAAAAdABIAGAAAAAkAAAAeAA8AGAAAAAAAAAAeABAAGAAAAAkAAAAeABEAGAAAAAkAAAAeABIAGAAAAAkAAAAfAA8AGAAAAAAAAAAfABAAGAAAAAkAAAAfABEAGAAAAAkAAAAfABIAGAAAAAkAAAAgAA8AGAAAAAAAAAAgABAAGAAAAAkAAAAgABEAGAAAAAkAAAAgABIAGAAAAAkAAAAhAA8AGAAAAAAAAAAhABAAGAAAAAkAAAAhABEAGAAAAAkAAAAhABIAGAAAAAkAAAAiAA8AGAAAAAAAAAAiABAAGAAAAAkAAAAiABEAGAAAAAkAAAAiABIAGAAAAAkAAAAXABAAGAAAAAAAAAA=")
+tile_set = ExtResource("3_7qqnc")
+
+[node name="Grass" type="TileMapLayer" parent="Node2D" unique_id=72044996]
+tile_map_data = PackedByteArray("AAAPAA8AGQAAAAAAAAAQAA8AGQAAAAAAAAARAA8AGQAAAAAAAAASAA8AGQAAAAAAAAATAA8AGQAAAAAAAAAWAA8AGQAAAAAAAAAXAA8AGQAAAAAAAAAYAA8AGQAAAAAAAAAdAA4AGQAAAAAAAAAeAA4AGQAAAAAAAAAfAA4AGQAAAAAAAAAgAA4AGQAAAAAAAAAhAA4AGQAAAAAAAAA=")
+tile_set = ExtResource("3_7qqnc")
+script = ExtResource("4_kgbvn")
+grass_scene = ExtResource("4_5aw5e")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1408941913]
+visible = false
+color = Color(0, 0.047058824, 0.14509805, 1)
 
 [editable path="Player"]
 [editable path="Window"]

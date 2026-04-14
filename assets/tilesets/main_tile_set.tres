@@ -1,0 +1,37 @@
+[gd_resource type="TileSet" format=3 uid="uid://c28u367y0p21l"]
+
+[ext_resource type="Texture2D" uid="uid://cmoeorekb1k8y" path="res://assets/tilesets/test.png" id="1_5pqix"]
+[ext_resource type="Texture2D" uid="uid://b4stv8aqvmw58" path="res://assets/tilesets/tileset sources/grass.png" id="2_cvteq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g1n80"]
+texture = ExtResource("1_5pqix")
+margins = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+0:10/0 = 0
+0:11/0 = 0
+0:12/0 = 0
+0:13/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yvmfw"]
+texture = ExtResource("2_cvteq")
+margins = Vector2i(2, 1)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+
+[resource]
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "is_grass"
+custom_data_layer_0/type = 1
+sources/24 = SubResource("TileSetAtlasSource_g1n80")
+sources/25 = SubResource("TileSetAtlasSource_yvmfw")
+tile_proxies/coords_level = [[22, Vector2i(0, 0)], [24, Vector2i(0, 0)], [22, Vector2i(0, 1)], [24, Vector2i(0, 1)], [22, Vector2i(0, 2)], [24, Vector2i(0, 2)], [22, Vector2i(0, 3)], [24, Vector2i(0, 3)], [22, Vector2i(0, 4)], [24, Vector2i(0, 4)], [22, Vector2i(0, 5)], [24, Vector2i(0, 5)], [22, Vector2i(0, 6)], [24, Vector2i(0, 6)], [22, Vector2i(0, 7)], [24, Vector2i(0, 7)], [22, Vector2i(0, 8)], [24, Vector2i(0, 8)], [22, Vector2i(0, 9)], [24, Vector2i(0, 9)]]

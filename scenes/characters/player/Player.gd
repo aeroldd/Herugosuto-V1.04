@@ -7,6 +7,9 @@ var input_intent: InputIntent
 var facing_component: FacingComponent
 
 func _ready() -> void:
+	# assign the player to the game state controller
+	GameState.player = self
+	
 	# initialise movement controller, combat controller, etc.
 	movement_controller = $MovementController
 	aiming_component = $AimingComponent
