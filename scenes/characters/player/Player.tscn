@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dveg18orlosfo"]
+[gd_scene format=3 uid="uid://dveg18orlosfo"]
 
 [ext_resource type="Script" uid="uid://c13p1llgp7f2t" path="res://scenes/characters/player/Player.gd" id="1_c12fh"]
 [ext_resource type="Script" uid="uid://upuj6cnbmsdi" path="res://scripts/systems/Gravity.gd" id="2_b7oxf"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bl3xboi8ve1nt" path="res://scenes/vfx/vfx_controller.gd" id="16_7onrl"]
 [ext_resource type="Script" uid="uid://dpex28bokpbjw" path="res://scenes/characters/player/dash_vfx.gd" id="17_o3xhh"]
 [ext_resource type="Script" uid="uid://c5p7a4p1thqwi" path="res://scenes/characters/player/jump_vfx.gd" id="19_yr7ad"]
+[ext_resource type="Texture2D" uid="uid://bx8lr6nc1dn31" path="res://assets/light/light.png" id="20_7n5xd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_imd1d"]
 size = Vector2(28, 41)
@@ -27,66 +28,66 @@ size = Vector2(28, 41)
 _data = [Vector2(0.010416672, 0.035019517), 0.0, 0.0, 0, 0, Vector2(0.24652778, 0.53307396), 0.0, 0.0, 0, 0, Vector2(0.50347227, 0.82879376), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=2120558363]
 script = ExtResource("1_c12fh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1225170537]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_imd1d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=155531232]
 texture = ExtResource("2_lxifr")
 
-[node name="MovementController" type="Node" parent="."]
+[node name="MovementController" type="Node" parent="." unique_id=1561343304]
 script = ExtResource("4_lces5")
 dash_length = 0.3
 dash_strength = 660.0
 curve = SubResource("Curve_iugeb")
 
-[node name="HorizontalMovementComponent" type="Node" parent="MovementController"]
+[node name="HorizontalMovementComponent" type="Node" parent="MovementController" unique_id=1071031150]
 script = ExtResource("5_jhxyj")
 
-[node name="FrictionComponent" type="Node" parent="MovementController"]
+[node name="FrictionComponent" type="Node" parent="MovementController" unique_id=1463076426]
 script = ExtResource("8_lces5")
 friction = 5000.0
 
-[node name="GravityComponent" type="Node" parent="MovementController"]
+[node name="GravityComponent" type="Node" parent="MovementController" unique_id=1863553547]
 script = ExtResource("2_b7oxf")
 gravity = 1500
 metadata/_custom_type_script = "uid://upuj6cnbmsdi"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="MovementController" node_paths=PackedStringArray("dash_controller")]
+[node name="CanvasLayer" type="CanvasLayer" parent="MovementController" unique_id=907229853 node_paths=PackedStringArray("dash_controller")]
 script = ExtResource("9_iugeb")
 dash_controller = NodePath("../MovementAbilities/DashAbility")
 
-[node name="StateDebugger" type="Label" parent="MovementController/CanvasLayer"]
+[node name="StateDebugger" type="Label" parent="MovementController/CanvasLayer" unique_id=439974696]
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="InputDebugger" type="Label" parent="MovementController/CanvasLayer"]
+[node name="InputDebugger" type="Label" parent="MovementController/CanvasLayer" unique_id=1493161395]
 offset_top = 24.0
 offset_right = 37.0
 offset_bottom = 47.0
 
-[node name="DashDebugger" type="Label" parent="MovementController/CanvasLayer"]
+[node name="DashDebugger" type="Label" parent="MovementController/CanvasLayer" unique_id=90311608]
 offset_left = 1.0
 offset_top = 74.0
 offset_right = 41.0
 offset_bottom = 97.0
 
-[node name="VelocityDebugger" type="Label" parent="MovementController/CanvasLayer"]
+[node name="VelocityDebugger" type="Label" parent="MovementController/CanvasLayer" unique_id=1761066996]
 offset_top = 108.0
 offset_right = 40.0
 offset_bottom = 131.0
 
-[node name="MovementAbilities" type="Node" parent="MovementController"]
+[node name="MovementAbilities" type="Node" parent="MovementController" unique_id=567161009]
 script = ExtResource("10_iugeb")
 
-[node name="JumpAbility" type="Node" parent="MovementController/MovementAbilities"]
+[node name="JumpAbility" type="Node" parent="MovementController/MovementAbilities" unique_id=269437263]
 script = ExtResource("7_5edqu")
 metadata/_custom_type_script = "uid://cb5a0nwhvc42a"
 
-[node name="DashAbility" type="Node" parent="MovementController/MovementAbilities" node_paths=PackedStringArray("sprite")]
+[node name="DashAbility" type="Node" parent="MovementController/MovementAbilities" unique_id=437673793 node_paths=PackedStringArray("sprite")]
 script = ExtResource("7_k835w")
 dash_strength = 850
 dash_length = 0.175
@@ -95,38 +96,45 @@ spawn_interval = 0.02
 after_image = ExtResource("11_n0ygo")
 sprite = NodePath("../../../Sprite2D")
 
-[node name="MovementStateMachine" type="Node" parent="MovementController"]
+[node name="MovementStateMachine" type="Node" parent="MovementController" unique_id=1264541953]
 script = ExtResource("11_tdog2")
 
-[node name="FacingComponent" type="Node" parent="."]
+[node name="FacingComponent" type="Node" parent="." unique_id=1382558491]
 script = ExtResource("4_7xy7u")
 
-[node name="AimingComponent" type="Node" parent="."]
+[node name="AimingComponent" type="Node" parent="." unique_id=1127278502]
 script = ExtResource("6_imd1d")
 metadata/_custom_type_script = "uid://b1ockxpysdx5h"
 
-[node name="CrossHair" type="Marker2D" parent="AimingComponent"]
+[node name="CrossHair" type="Marker2D" parent="AimingComponent" unique_id=360147466]
 position = Vector2(20, 0)
 
-[node name="InputIntent" type="Node2D" parent="."]
+[node name="InputIntent" type="Node2D" parent="." unique_id=378234960]
 script = ExtResource("11_wwjds")
 
-[node name="VFXController" type="Node2D" parent="."]
+[node name="VFXController" type="Node2D" parent="." unique_id=466406936]
 script = ExtResource("16_7onrl")
 
-[node name="DashVFX" type="Node2D" parent="VFXController" node_paths=PackedStringArray("sprite", "camera")]
+[node name="DashVFX" type="Node2D" parent="VFXController" unique_id=637545527 node_paths=PackedStringArray("sprite", "camera")]
 script = ExtResource("17_o3xhh")
 after_image = ExtResource("11_n0ygo")
 sprite = NodePath("../../Sprite2D")
 camera = NodePath("../../CameraController")
 
-[node name="JumpVFX" type="Node2D" parent="VFXController"]
+[node name="JumpVFX" type="Node2D" parent="VFXController" unique_id=1476963833]
 script = ExtResource("19_yr7ad")
 
-[node name="CameraController" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="CameraController" type="Node2D" parent="." unique_id=762386702 node_paths=PackedStringArray("camera")]
 script = ExtResource("14_omv6f")
 camera = NodePath("Camera2D")
 
-[node name="Camera2D" type="Camera2D" parent="CameraController"]
+[node name="Camera2D" type="Camera2D" parent="CameraController" unique_id=1489927732]
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1456242118]
+visible = false
+energy = 1.59
+blend_mode = 2
+texture = ExtResource("20_7n5xd")
+texture_scale = 2.23
