@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://nwt62gdcrnkr"]
+
+[ext_resource type="PackedScene" uid="uid://diao5v24xqtls" path="res://scenes/grass/Grass.tscn" id="1_f1l71"]
+[ext_resource type="Shader" uid="uid://ciwc07x00npus" path="res://scenes/grass/Grass.gdshader" id="2_jas1m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxj5i"]
+shader = ExtResource("2_jas1m")
+shader_parameter/wind_strength = 5.0
+shader_parameter/wave_frequency = 1.0
+shader_parameter/wave_phase = 0.0
+
+[node name="Node2D" type="Node2D" unique_id=990654848]
+
+[node name="Grass" parent="." unique_id=553322821 instance=ExtResource("1_f1l71")]
+position = Vector2(266, 162)
+grass_density = 9
+shader_material = SubResource("ShaderMaterial_lxj5i")
+
+[editable path="Grass"]
