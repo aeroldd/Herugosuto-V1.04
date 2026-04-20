@@ -31,7 +31,7 @@ func check_dash_pressed(input_intent):
 	
 # Calculates the changed dash velocity if conditions are met (dash cooldown reset and dash input pressed_
 func apply(input_intent, _velocity, delta):
-	if input_intent.dash_pressed:
+	if input_intent.dash_pressed and GameState.player_ctx["can_dash"]:
 		# Check if dash hasn't been pressed yet
 		if dash_timer == 0:
 			dash_timer = dash_length
@@ -50,11 +50,19 @@ func apply(input_intent, _velocity, delta):
 	
 	return dash_velocity
 	
-func update(flags):
-	var was_dashing = flags.get("is_dashing", false)
+func _process(delta: float) -> void:
+	var was_dashing = GameState.player_ctx.get("is_dashing", false)
+	
+	if was_dashing and not  GameState.player_ctx["is_on_floor"]:
+		GameState.player_ctx["can_dash"] = false
+		
+	# when touching the floor, can dash is always reset to true
+	if GameState.player_ctx["is_on_floor"]:
+		GameState.player_ctx["can_dash"] = true
+		
 	var is_dashing = dash_timer != 0
 	
-	flags["is_dashing"] = is_dashing
+	GameState.player_ctx["is_dashing"] = is_dashing
 	
 	if is_dashing and not was_dashing:
 		emit_signal("dash_started")

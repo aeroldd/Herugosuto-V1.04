@@ -34,7 +34,7 @@ var body: Player
 var friction_component: FrictionComponent
 var gravity_component: GravityComponent
 
-var movement_abilities: MovementAbilityController 
+var movement_abilities: MovementAbilityController
 
 func _ready():
 	body = get_parent()
@@ -42,12 +42,6 @@ func _ready():
 	friction_component = $FrictionComponent
 	gravity_component = $GravityComponent
 	movement_abilities = $MovementAbilities
-
-# State flags
-var flags = {"is_moving" = false,
-			 "is_controller" = false,
-			 "is_on_floor" = false,
-			 "is_dashing" = false}
 
 # Getters and setters
 
@@ -61,19 +55,18 @@ func get_current_state_name():
 	return states.find_key(current_state)
 
 func update_flags():
-	if not flags["is_on_floor"] and body.is_on_floor():
+	if not GameState.player_ctx["is_on_floor"] and body.is_on_floor():
 		emit_signal("landed_on_floor", velocity_y_history[-2])
 		
-	flags["is_on_floor"] = body.is_on_floor()
-	flags["is_controlled"] = input_intent.move_direction != 0
-	flags["is_moving"] = velocity != Vector2.ZERO
+	GameState.player_ctx["is_on_floor"] = body.is_on_floor()
+	GameState.player_ctx["is_controlled"] = input_intent.move_direction != 0
+	GameState.player_ctx["is_moving"] = velocity != Vector2.ZERO
 	
 	
 func apply(input_intent, delta):
 	update_flags()
-	velocity = horizontal_movement_component.apply(input_intent, velocity, delta) + gravity_component.apply(velocity, flags["is_on_floor"], delta) + movement_abilities.apply(input_intent, velocity, delta)
-	movement_abilities.update(flags)
-	
+	velocity = horizontal_movement_component.apply(input_intent, velocity, delta) + gravity_component.apply(velocity, GameState.player_ctx["is_on_floor"], delta) + movement_abilities.apply(input_intent, velocity, delta)
+	velocity = movement_abilities.apply_impulse(input_intent, velocity, delta)
 	return velocity
 	
 # DEBUGGING STUFF

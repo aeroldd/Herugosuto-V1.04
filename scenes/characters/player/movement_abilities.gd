@@ -9,11 +9,20 @@ func _ready():
 	pass
 
 func apply(input_intent, veloicty, delta) -> Vector2:
-	velocity = Vector2.ZERO
+	var calc_velocity = Vector2.ZERO
 	for ability in movement_abilities:
-		velocity += ability.apply(input_intent, velocity, delta)
-	return velocity
+		calc_velocity += ability.apply(input_intent, velocity, delta)
+	return calc_velocity
 	
-func update(flags):
+# impulse velocities override the existing one -- used for jumps
+func apply_impulse(input_intent, velocity, delta) -> Vector2:
+	var calc_velocity = Vector2.ZERO
 	for ability in movement_abilities:
-		ability.update(flags)
+		calc_velocity += ability.apply_impulse(input_intent, velocity, delta)
+	
+	if calc_velocity.x == 0:
+		calc_velocity = Vector2(velocity.x , calc_velocity.y)
+	if calc_velocity.y == 0:
+		calc_velocity = Vector2(calc_velocity.x, velocity.y)
+		
+	return calc_velocity

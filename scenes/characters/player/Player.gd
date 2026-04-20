@@ -16,6 +16,14 @@ func _ready() -> void:
 	input_intent = $InputIntent
 	facing_component = $FacingComponent 
 	
+	# initialise player flags
+	GameState.player_ctx = {"is_moving" = false,
+			 "is_controller" = false,
+			 "is_on_floor" = false,
+			 "is_dashing" = false,
+			 "jump_count" = 0,
+			"can_dash" = false}
+	
 	movement_controller.set_input_intent(input_intent)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
